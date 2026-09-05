@@ -1,5 +1,4 @@
-# Throat-Cancer-Detection-Using-Speech-Signals-and-Machine-Learning
-AI-powered throat cancer detection system using speech signals, MFCC feature extraction, and deep learning models such as CNN and Bi-LSTM to classify voice samples as Normal or Potential Throat Cancer.
+
 # Detecting Throat Cancer from Speech Signals Using Machine Learning
 
 ## 📌 About the Project

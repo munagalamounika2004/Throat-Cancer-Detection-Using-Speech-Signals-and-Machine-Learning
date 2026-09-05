@@ -451,22 +451,6 @@ The literature review also identifies limited datasets, inconsistent methodologi
 
 ---
 
-# 👥 Contributors
-
-### Mounika Munagala
-
-B.Tech – Information Technology
-
-### Thrishma Rapolu
-
-B.Tech – Information Technology
-
-### Likhitha Talagana
-
-B.Tech – Information Technology
-
----
-
 # 🎓 Academic Project
 
 **Project:** Detecting Throat Cancer from Speech Signals Using Machine Learning

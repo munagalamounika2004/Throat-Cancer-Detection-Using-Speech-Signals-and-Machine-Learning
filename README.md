@@ -1,75 +1,117 @@
-
-# Detecting Throat Cancer from Speech Signals Using Machine Learning
+# 🎙️ Detecting Throat Cancer from Speech Signals Using Machine Learning
 
 ## 📌 About the Project
 
-This project focuses on detecting potential throat cancer from **speech signals using Machine Learning and Deep Learning techniques**.
+This project is a **web-based speech analysis application** developed using Python, Flask, and Deep Learning to classify speech signals into two categories:
 
-The system analyzes speech samples by performing audio preprocessing and extracting relevant acoustic features such as **Mel-Frequency Cepstral Coefficients (MFCCs)** and mel-spectrograms. These features are then used with machine learning/deep learning models to classify speech samples as **Normal** or **Potential Throat Cancer**.
+* **Normal**
+* **Potential Throat Cancer**
 
-The objective is to explore a **non-invasive and accessible approach** for early screening of potential throat cancer using speech analysis.
+The application accepts an audio sample, processes the speech signal, extracts a mel-spectrogram representation, and uses a trained **CNN-BiLSTM deep learning model** to generate a classification result.
 
-> ⚠️ **Disclaimer:** This project is developed for academic and research purposes. It is not intended to replace professional medical diagnosis.
+The project also includes user authentication, user dashboards, prediction history, report generation, administrative functionality, and performance monitoring.
+
+> ⚠️ **Disclaimer:** This project is developed for academic and research purposes only. It is not intended to replace professional medical diagnosis or medical advice.
 
 ---
 
 ## 🎯 Objectives
 
-* Analyze speech signals for potential indicators of throat cancer.
-* Preprocess speech recordings to improve input quality.
-* Extract relevant acoustic features from speech.
-* Use MFCC and other speech representations for analysis.
-* Apply machine learning and deep learning techniques for classification.
-* Provide a simple interface for submitting speech samples and viewing results.
+* Analyze speech signals for patterns associated with throat cancer.
+* Preprocess uploaded speech recordings.
+* Convert speech signals into suitable audio representations for model prediction.
+* Apply a CNN-BiLSTM deep learning model for classification.
+* Provide a simple web interface for speech analysis.
+* Allow users to view and manage their prediction results.
+* Provide administrative features for monitoring application activity.
+* Generate reports based on prediction results.
 
 ---
 
 ## 🔍 Problem Statement
 
-Traditional throat cancer diagnosis may involve invasive and costly procedures such as laryngoscopy and biopsy. Voice changes can also occur due to various benign disorders, making early differentiation challenging.
+Changes in voice characteristics can occur due to several conditions, including disorders affecting the throat and vocal system.
 
-This project explores the use of **speech signals and machine learning** as a non-invasive approach for identifying patterns that may be associated with throat cancer.
+This project explores whether speech signals can be used as a **non-invasive screening approach** for identifying patterns that may be associated with throat cancer.
+
+The system is intended as an academic demonstration of applying **speech processing, machine learning, deep learning, and web application development** to a healthcare-related problem.
 
 ---
 
 ## 💡 Proposed Solution
 
-The proposed system follows a speech-processing and machine-learning pipeline:
+The application follows this general workflow:
 
 ```text
-Speech Input
-     ↓
-Audio Preprocessing
-     ↓
-Feature Extraction
-     ↓
-MFCC / Mel-Spectrogram
-     ↓
-Machine Learning / Deep Learning Model
-     ↓
-Classification
-     ↓
-Result
+                🎙️ Speech Input
+                       │
+                       ▼
+              🔊 Audio Preprocessing
+                       │
+                       ▼
+              📊 Mel-Spectrogram
+                       │
+                       ▼
+              🧠 CNN-BiLSTM Model
+                       │
+                       ▼
+                 Classification
+                       │
+                       ▼
+                📋 Result Display
+                       │
+                       ▼
+                 📄 PDF Report
 ```
 
-The system accepts speech samples, preprocesses the audio, extracts acoustic features, and uses classification models to generate a prediction.
+The uploaded audio is processed and converted into a fixed-size mel-spectrogram representation before being passed to the trained deep learning model.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-* 🎙️ Speech recording or upload
-* 🔊 Audio preprocessing
-* 🧹 Noise reduction and normalization
-* 📊 MFCC feature extraction
-* 📈 Mel-spectrogram analysis
-* 🧠 Machine learning/deep learning classification
-* 📋 Prediction result generation
-* 👤 User/patient module
-* 👨‍💼 Admin module
-* 🗄️ Database support
+### 🎙️ Speech Analysis
 
-The project specification includes speech input, preprocessing, feature extraction, ML model integration, and classification into **Normal** or **Potential Throat Cancer**.
+* Upload speech/audio samples.
+* Process audio files using Librosa.
+* Normalize and prepare audio for prediction.
+* Convert speech into mel-spectrogram features.
+
+### 🧠 Machine Learning / Deep Learning
+
+* CNN-BiLSTM based classification model.
+* TensorFlow-based model prediction.
+* Feature normalization using stored statistical parameters.
+* Classification into Normal or Potential Throat Cancer.
+
+### 👤 User Features
+
+* User registration and login.
+* User dashboard.
+* Speech submission.
+* Prediction history.
+* View prediction results.
+* Download generated reports.
+* Manage profile information.
+* Update password.
+* Manage notes and submissions.
+
+### 👨‍💼 Admin Features
+
+* Administrative dashboard.
+* User management.
+* Submission monitoring.
+* Activity tracking.
+* Feedback management.
+* Performance monitoring.
+
+### 📊 Reporting & Monitoring
+
+* Prediction result generation.
+* PDF report generation.
+* Performance metrics.
+* Application activity tracking.
+* Notification functionality.
 
 ---
 
@@ -77,145 +119,99 @@ The project specification includes speech input, preprocessing, feature extracti
 
 ### 1. Audio Preprocessing
 
-The input speech signal is prepared before feature extraction.
+The application prepares the uploaded speech recording before prediction.
 
-Preprocessing includes:
+The preprocessing pipeline includes:
 
-* Noise reduction
-* Normalization
-* Audio segmentation
-* Improving the quality of the input signal
+* Loading the audio file.
+* Trimming unnecessary silence.
+* Normalizing the audio signal.
+* Converting the audio into a mel-spectrogram.
+* Converting the spectrogram to a decibel scale.
+* Padding or truncating the representation to a fixed length.
 
-### 2. Feature Extraction
+### 2. Feature Representation
 
-The system extracts acoustic features from the speech signal.
+The implemented prediction pipeline uses a **mel-spectrogram** representation.
 
-The main feature used is:
+The application uses:
 
-**MFCC — Mel-Frequency Cepstral Coefficients**
+* Sample rate: **16,000 Hz**
+* Number of mel bands: **64**
+* Maximum sequence length: **160**
 
-Other speech representations include:
+The extracted features are normalized using stored feature mean and standard deviation values before being passed to the model.
 
-* Mel-spectrograms
-* Jitter
-* Shimmer
+### 3. Deep Learning Model
 
-These features provide information about the characteristics of the speech signal.
+The project uses a **CNN-BiLSTM architecture**.
 
-### 3. Classification
+* **CNN** layers learn spatial patterns from the speech feature representation.
+* **Bi-LSTM** layers learn temporal patterns from the sequence.
+* The final layers generate the classification prediction.
 
-The proposed system considers deep learning architectures including:
+### 4. Classification
 
-* CNN
-* RNN
-* Bi-LSTM
-
-CNN can be used for learning patterns from speech feature representations, while recurrent architectures can capture temporal patterns in speech.
-
----
-
-## 🔄 System Workflow
+The system produces one of the following outcomes:
 
 ```text
-                  ┌───────────────────┐
-                  │   User / Patient  │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │   Speech Input    │
-                  │  Record / Upload  │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │ Audio Preprocessing│
-                  │ Noise Reduction   │
-                  │ Normalization     │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │ Feature Extraction│
-                  │ MFCC / Mel-Spec.  │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │ ML / DL Model     │
-                  │ CNN / RNN /       │
-                  │ Bi-LSTM           │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │   Classification  │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │   Result Display  │
-                  └───────────────────┘
+Normal
 ```
+
+or
+
+```text
+Potential Throat Cancer
+```
+
+> ⚠️ The prediction is an academic machine-learning output and should not be interpreted as a clinical diagnosis.
 
 ---
 
 ## 🛠️ Technologies Used
 
-| Category                | Technology                       |
-| ----------------------- | -------------------------------- |
-| Programming Language    | Python                           |
-| Machine Learning        | Machine Learning / Deep Learning |
-| Deep Learning           | CNN, RNN, Bi-LSTM                |
-| Audio Processing        | Librosa                          |
-| Feature Extraction      | MFCC, Mel-Spectrogram            |
-| Web Framework           | Flask                            |
-| Frontend                | HTML, CSS, JavaScript            |
-| Database                | MySQL                            |
-| Development Environment | Jupyter Notebook / VS Code       |
-| Version Control         | Git / GitHub                     |
-
-The project report specifies Python, Flask, HTML/CSS/JavaScript and MySQL as the software technologies.
+| Category             | Technologies               |
+| -------------------- | -------------------------- |
+| Programming Language | Python                     |
+| Web Framework        | Flask                      |
+| Authentication       | Flask-Login                |
+| Deep Learning        | TensorFlow / CNN / Bi-LSTM |
+| Audio Processing     | Librosa                    |
+| Numerical Computing  | NumPy                      |
+| Machine Learning     | Scikit-learn               |
+| PDF Generation       | ReportLab                  |
+| Frontend             | HTML, CSS, JavaScript      |
+| Development Tools    | VS Code / Jupyter Notebook |
+| Version Control      | Git / GitHub               |
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```text
-throat-cancer-speech-detection/
+Throat-Cancer-Detection-Using-Speech-Signals-and-Machine-Learning/
 │
-├── dataset/
-│   ├── normal/
-│   └── cancer/
+├── ml_models/
+│   └── final_cnn_bilstm.h5
 │
-├── notebooks/
-│   ├── preprocessing.ipynb
-│   ├── feature_extraction.ipynb
-│   └── model_training.ipynb
+├── ml_models_up/
+│   └── updated_cnn_bilstm.h5
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── feature_extraction.py
-│   ├── model.py
-│   └── prediction.py
-│
-├── models/
-│   └── trained_model.h5
-│
-├── templates/
-│   ├── index.html
-│   ├── login.html
-│   └── result.html
+├── screenshots/
+│   ├── Admin_Dashboard.png
+│   ├── Home.png
+│   ├── Login_Page.png
+│   ├── Performance_Metrics.png
+│   ├── Result.png
+│   └── User_Dashboard.png
 │
 ├── static/
 │   ├── css/
 │   ├── js/
 │   └── images/
 │
-├── screenshots/
-│   ├── home.png
-│   ├── speech-input.png
-│   └── result.png
+├── templates/
+│   └── HTML templates
 │
 ├── app.py
 ├── requirements.txt
@@ -223,129 +219,65 @@ throat-cancer-speech-detection/
 └── README.md
 ```
 
-> **Important:** Change this structure to match your actual project files before publishing. Do not add files or folders that don't exist in your repository.
-
 ---
 
-# ⚙️ Installation
+## ⚙️ Installation & Setup
 
-## Prerequisites
+### Prerequisites
 
-Make sure you have the following installed:
+Make sure the following are installed:
 
 * Python 3.x
 * pip
 * Git
-* MySQL
-* VS Code or another Python IDE
 
----
-
-## 1. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/throat-cancer-speech-detection.git
+git clone https://github.com/munagalamounika2004/Throat-Cancer-Detection-Using-Speech-Signals-and-Machine-Learning.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-cd throat-cancer-speech-detection
+cd Throat-Cancer-Detection-Using-Speech-Signals-and-Machine-Learning
 ```
 
----
+### 2. Create a Virtual Environment
 
-## 2. Create a Virtual Environment
-
-### Windows
+#### Windows
 
 ```bash
 python -m venv venv
-```
-
-Activate the environment:
-
-```bash
 venv\Scripts\activate
 ```
 
-### macOS / Linux
+#### macOS / Linux
 
 ```bash
 python3 -m venv venv
-```
-
-Activate:
-
-```bash
 source venv/bin/activate
 ```
 
----
-
-## 3. Install Dependencies
-
-If the repository contains `requirements.txt`:
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Example dependencies used for the project may include:
-
-```text
-numpy
-pandas
-librosa
-scikit-learn
-matplotlib
-seaborn
-flask
-mysql-connector-python
-```
-
-Add the exact versions used by your project to `requirements.txt`.
-
 ---
 
-# 🗄️ Database Configuration
+## ▶️ Running the Application
 
-The proposed application uses **MySQL** for storing relevant application data.
-
-Create the database:
-
-```sql
-CREATE DATABASE throat_cancer_detection;
-```
-
-Configure the database connection in the application:
-
-```python
-DB_HOST = "localhost"
-DB_USER = "your_username"
-DB_PASSWORD = "your_password"
-DB_NAME = "throat_cancer_detection"
-```
-
-### 🔐 Security
-
-Never upload actual passwords, API keys, or other credentials to GitHub.
-
-Use environment variables or a `.env` file for sensitive configuration.
-
----
-
-# ▶️ Running the Application
-
-After installing the dependencies, run:
+Start the Flask application:
 
 ```bash
 python app.py
 ```
 
-Open the local Flask URL displayed in your terminal.
+The application will run on the local Flask server.
 
-Example:
+Open the URL displayed in your terminal, typically:
 
 ```text
 http://127.0.0.1:5000/
@@ -353,104 +285,118 @@ http://127.0.0.1:5000/
 
 ---
 
-# 📊 Expected Output
-
-After submitting a speech sample, the system performs the processing and classification steps.
-
-Example output:
+## 📊 Application Workflow
 
 ```text
-Speech Analysis Result
-----------------------
-
-Prediction:
-Normal
+User
+ │
+ ▼
+Login / Registration
+ │
+ ▼
+User Dashboard
+ │
+ ▼
+Upload Speech
+ │
+ ▼
+Audio Processing
+ │
+ ▼
+Mel-Spectrogram Feature Extraction
+ │
+ ▼
+CNN-BiLSTM Model
+ │
+ ▼
+Prediction
+ │
+ ├── Normal
+ │
+ └── Potential Throat Cancer
+ │
+ ▼
+View Result
+ │
+ ▼
+Generate / Download Report
 ```
-
-or:
-
-```text
-Speech Analysis Result
-----------------------
-
-Prediction:
-Potential Throat Cancer
-```
-
-The project specification defines these two classification outcomes.
 
 ---
 
-# 🖼️ Screenshots
+## 🖼️ Screenshots
 
-Add screenshots of your **actual working application** to the `screenshots/` folder.
+### 🏠 Home Page
 
-## 🏠 Home Page
+![Home Page](screenshots/Home.png)
 
-```markdown
-![Home Page](screenshots/home.png)
-```
+### 🔐 Login Page
 
-## 🎙️ Speech Input
+![Login Page](screenshots/Login_Page.png)
 
-```markdown
-![Speech Input](screenshots/speech-input.png)
-```
+### 📊 Prediction Result
 
-## 📊 Feature Extraction
+![Prediction Result](screenshots/Result.png)
 
-```markdown
-![Feature Extraction](screenshots/features.png)
-```
+### 👤 User Dashboard
 
-## 🧠 Prediction Result
+![User Dashboard](screenshots/User_Dashboard.png)
 
-```markdown
-![Prediction Result](screenshots/result.png)
-```
+### 👨‍💼 Admin Dashboard
 
-## 👨‍💼 Admin Dashboard
+![Admin Dashboard](screenshots/Admin_Dashboard.png)
 
-```markdown
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
+### 📈 Performance Metrics
 
-Your report describes separate user/patient and admin functionality, including speech submission, results, user management, data management, and monitoring.
+![Performance Metrics](screenshots/Performance_Metrics.png)
 
 ---
 
-# 📈 Future Enhancements
+## 🔐 Security
 
-Potential future improvements include:
+The application includes security-related functionality such as:
 
-* Larger and more diverse speech datasets
-* Improved model generalization
-* Real-time speech analysis
-* Transfer learning
-* Explainable AI
-* Integration with electronic health records
-* Multimodal medical data analysis
-* Improved clinical workflow integration
-* Greater reproducibility through open-source datasets and code
+* User authentication.
+* Password management.
+* Login/session handling.
+* Secure handling of uploaded files.
+* Input validation.
+* Activity and security logging.
+* Protection of sensitive configuration information.
 
-These enhancements are consistent with the future directions described in the project report.
+> Never upload passwords, API keys, database credentials, or other secrets to GitHub.
 
 ---
 
-# ⚠️ Limitations
+## ⚠️ Limitations
 
-* Speech characteristics vary between individuals.
-* Dataset size and diversity can affect model performance.
-* Small datasets can increase the risk of overfitting.
-* Different recording environments can affect audio quality.
-* The model requires proper validation before real-world medical use.
-* The system should not be used as a standalone medical diagnostic tool.
-
-The literature review also identifies limited datasets, inconsistent methodologies, and reproducibility challenges as important limitations in speech-based throat-cancer research.
+* Speech characteristics can vary significantly between individuals.
+* Recording quality and environmental noise can affect predictions.
+* Model performance depends on the quality and diversity of the training data.
+* A machine-learning prediction cannot replace clinical examination.
+* The model requires further validation before any real-world medical application.
+* The project is intended for academic and research purposes.
 
 ---
 
-# 🎓 Academic Project
+## 🚀 Future Enhancements
+
+Possible improvements include:
+
+* Larger and more diverse speech datasets.
+* Improved model generalization.
+* Real-time speech analysis.
+* Model performance optimization.
+* Explainable AI techniques.
+* Additional acoustic features.
+* Improved visualization of model predictions.
+* Cloud deployment.
+* Integration with additional healthcare data sources.
+* Extensive clinical validation.
+
+---
+
+## 🎓 Academic Project
 
 **Project:** Detecting Throat Cancer from Speech Signals Using Machine Learning
 
@@ -462,14 +408,31 @@ The literature review also identifies limited datasets, inconsistent methodologi
 
 ---
 
-# 📜 Disclaimer
+## 📜 Disclaimer
 
 This project is developed for **academic and research purposes only**.
 
-The prediction generated by this system should not be considered a medical diagnosis or medical advice. Any suspected health condition should be evaluated by a qualified healthcare professional using appropriate clinical diagnostic procedures.
+The predictions generated by this application should **not be considered a medical diagnosis or medical advice**. Any suspected health condition should be evaluated by a qualified healthcare professional using appropriate clinical diagnostic procedures.
 
 ---
 
-# ⭐ Support
+## ⭐ Project Highlights
 
-If you found this project useful for learning about **Python, speech processing, machine learning, or deep learning**, consider giving the repository a ⭐ on GitHub
+This project demonstrates practical experience with:
+
+* Python
+* Flask
+* TensorFlow
+* CNN-BiLSTM
+* Speech Processing
+* Librosa
+* Machine Learning
+* Web Application Development
+* User Authentication
+* Database Integration
+* PDF Report Generation
+* Git & GitHub
+
+---
+
+**Built as an academic project to explore the application of Machine Learning and Speech Processing in healthcare.**
